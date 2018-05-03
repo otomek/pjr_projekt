@@ -87,3 +87,8 @@ summary(aov(age_shooter1 ~ injured, shootings.filter.type))
 summary(as.factor(shootings$shooter_deceased1))
 table(shootings$deceased_notes1)
 table(shootings$shooter_relationship1)
+
+
+shootings %>% ggplot(aes(x=as.factor(ulocale))) + geom_bar()
+
+
