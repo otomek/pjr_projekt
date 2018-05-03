@@ -34,9 +34,56 @@ shootings %>% ggplot(aes(x=year, y=state)) +
              position = position_jitter())
 
 
+shootings.race <- shootings %>% group_by(race_ethnicity_shooter1) %>% 
+  summarize(n = n(), kill = sum(killed), inj = sum(injured)) %>% 
+  arrange(desc(n))
+
+median(shootings$age_shooter1, na.rm = TRUE)
+
+table(shootings$race_ethnicity_shooter1, shootings$shooting_type)
 
 
+shootings.type <- shootings %>% group_by(shooting_type) %>% 
+  summarize(n = n(), kill = sum(killed), inj = sum(injured)) %>% 
+  arrange(desc(n))
+
+table(shootings$race_ethnicity_shooter2)
+shootings$age_shooter2
+
+table(shootings$resource_officer)
+
+shootings.officer <- shootings %>% group_by(resource_officer) %>% 
+  summarize(n = n(), kill = sum(killed), inj = sum(injured)) %>% 
+  arrange(desc(n))
+
+table(shootings$weapon)
 
 
+shootings %>% filter(casualties > 10) %>% select(casualties, weapon)
+
+table(shootings$weapon_source)
 
 
+shootings %>% 
+  filter(shooting_type %in% c('targeted', 'indiscriminate', 'accidental')) %>% 
+  ggplot(aes(x=shooting_type, y=age_shooter1)) +
+  geom_boxplot() + 
+  stat_summary(fun.y = mean, geom='point', color='red', size=3, shape=17)
+
+shootings.filter.type <- shootings %>% 
+  filter(shooting_type %in% c('targeted', 'indiscriminate', 'accidental'))
+
+summary(aov(age_shooter1 ~ shooting_type, shootings.filter.type))
+
+
+shootings %>% 
+  filter(shooting_type %in% c('targeted', 'indiscriminate', 'accidental')) %>% 
+  ggplot(aes(x=shooting_type, y=casualties)) +
+  geom_boxplot() + 
+  stat_summary(fun.y = mean, geom='point', color='red', size=3, shape=17)
+
+summary(aov(age_shooter1 ~ injured, shootings.filter.type))
+
+summary(as.factor(shootings$shooter_deceased1))
+table(shootings$deceased_notes1)
+table(shootings$shooter_relationship1)
