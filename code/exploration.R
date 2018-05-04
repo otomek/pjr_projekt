@@ -49,19 +49,22 @@ shootings.year <- shootings %>% group_by(year) %>%
 shootings.year %>% ggplot(aes(x=as.factor(year), y=n)) + 
   geom_col(color='black', fill='darkgrey') + 
   theme_minimal() + ggtitle('Number of shootings in each year') + 
-  labs(x = '', y = '')
+  labs(x = '', y = '') + 
+  geom_hline(yintercept = mean(shootings.year$n), color='red', lty=2)
 
 ### liczba zabitych ####
 shootings.year %>% ggplot(aes(x=as.factor(year), y=kill)) + 
   geom_col(color='black', fill='darkgrey') + 
   theme_minimal() + ggtitle('Number of killed in each year') + 
-  labs(x = '', y = '')
+  labs(x = '', y = '') +
+  geom_hline(yintercept = mean(shootings.year$kill), color='red', lty=2)
 
 ### liczba rannych ####
 shootings.year %>% ggplot(aes(x=as.factor(year), y=inj)) + 
   geom_col(color='black', fill='darkgrey') + 
   theme_minimal() + ggtitle('Number of injured in each year') + 
-  labs(x = '', y = '')
+  labs(x = '', y = '') +
+  geom_hline(yintercept = mean(shootings.year$inj), color='red', lty=2)
 
 ### sredni wiek ####
 shootings.year %>% ggplot(aes(x=as.factor(year), y=mean.age)) + 
@@ -204,7 +207,7 @@ shootings %>% ggplot(aes(x=gender_shooter1)) +
 shootings %>% group_by(gender_shooter1) %>% 
   summarise(n = n())
 # tabelka bedzie lepsza
-# zdecydowana przwaga mezczyzn
+# zdecydowana przewaga mezczyzn
 
 
 ### motywy napastnikow ####
