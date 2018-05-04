@@ -6,7 +6,7 @@ library(ggrepel)
 
 
 
-####### obrobka danych #######
+####### Obrobka danych #######
 
 ### wczytuje dane ####
 shootings <- read.csv("https://raw.githubusercontent.com/washingtonpost/data-school-shootings/master/school-shootings-data.csv")
@@ -31,7 +31,7 @@ shootings <- shootings %>%
   select(-year2)
 
 
-####### analiza czasowa #######
+####### Analiza czasowa #######
 # sprawdzam, czy mozna zaobserwowac jakies wzorce zwiazane z czasem
 
 ### grupowanie po roku ####
@@ -103,7 +103,7 @@ shootings.weekday %>% ggplot(aes(x=day_of_week, y=n)) +
 # raczej pierwsza polowa tygodnia
 
 
-####### analiza przestrzenna #######
+####### Analiza przestrzenna #######
 # sprawdzam, czy mozna zaobserwowac jakies wzorce zwiazane z miejscem
 # a konkretnie - czy ktorys stan przewaza
 
@@ -178,7 +178,7 @@ shootings %>% ggplot(aes(x=state, y=injured)) +
 
 
 
-####### wiek, plec, motywy #######
+####### Wiek, plec, motywy napastnikow #######
 
 
 ### histogram wieku ####
@@ -288,18 +288,15 @@ kruskal.test(age_shooter1 ~ shooting_type, shootings.filter.type)
 
 
 
+####### Obecnosc ochroniarza #######
 
-shootings.officer <- shootings %>% group_by(resource_officer) %>% 
-  summarize(n = n(), kill = sum(killed), inj = sum(injured)) %>% 
-  arrange(desc(n))
-
-table(shootings$weapon)
-
-
-shootings %>% filter(casualties > 10) %>% select(casualties, weapon)
-
-table(shootings$weapon_source)
+shootings %>% group_by(resource_officer) %>% 
+  summarize(n = n(), kill = sum(killed), inj = sum(injured)) 
+# to jest ciekawe - dwa razy mniej strzelanin, gdy ochroniarz
+# obecny, ale liczba zabitych i rannych podobna
 
 
-
+###### Co jeszcze mozna sprawdzic? ######
+# - strukture uczniow w tych szkolach
+# - rodzaj i pochodzenie broni (choc tutaj dane sa trudniejsze do obrobki)
 
