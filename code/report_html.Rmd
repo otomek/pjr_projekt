@@ -451,12 +451,20 @@ Z wykresu wynika, że większość najtragiczniejszych strzelanin miała miejsce
 
 # Wnioski
 
-*(wnioski z przeprowadzonej analizy - krótkie podsumowanie najważniejszych obserwacji)*
+1. Analiza czasowa nie wykazuje żadnych tendencji rozwojowych. Na uwagę zasługuje jednak fakt, że rok 2018, chociaż nie minęła jeszcze nawet jego połowa, już jest rekordowy pod względem liczby rannych.
+2. Najwięcej strzelanin wydarzyło się w pierwszej połowie tygodnia.
+3. Pomimo tego, że trzy stany o największej populacji przodują jeśli chodzi o liczbę strzelanin, to liczba incydentów nie jest wprost proporcjonalna do liczebności stanu. Stąd można przypuszczać, że na prawdopodobieństwo wystąpienia strzelaniny w danym stanie wpływ mają inne czynniki.
+4. Jeżeli chodzi o liczbę rannych i zabitych w poszczególnych stanach, to wykrycie ewentualnych prawidłowości utrudniają obserwacje skrajne (takie jak strzelaniny w Connecticut w 2012 roku czy na Florydzie w 2018).
+5. Mediana wieku sprawców wynosi 16 lat, najwięcej strzelanin było spowodowanych przez osoby w wieku 15 lat. Zdecydowana większość sprawców jest płci męskiej.
+6. Najwięcej ofiar spowodowały nieprzypadkowe ataki bez określonego celu.
+7. Większość incydentów miało miejsce w szkołach, w których nie było ochroniarza. Jednak ataki, które nastąpiły przy obecności ochroniarza, były w swoich skutkach (przeciętnie) bardziej tragiczne.
 
 # Co dalej?
 
 Dalsze analizy mogłyby uwzględnić:
 
-* strukturę uczniów w tych szkołach,
-* rodzaj i pochodzenie broni (choć tutaj dane są trudniejsze do obróbki)
+* sprawdzenie, czy jakieś szkoły się powtarzają,
+* analizę strukturę uczniów szkołach (także tych, w których nie doszło do ataków, co wymagałoby jednak pozyskania dodatkowych danych),
+* analizę rodzaju i pochodzenia broni (choć tutaj dane są trudniejsze do obróbki),
+* próbę budowy modelu statystycznego, którego celem byłoby określenie prawdopodobieństwo wystąpienia ataku w danej szkole (należałoby wykluczyć przypadki skrajne oraz najprawdopodobniej skorzystać z dodatkowych danych).
 
