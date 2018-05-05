@@ -1,6 +1,6 @@
 ---
 title: "Strzelaniny w szkołach w USA w latach 1999-2018 - analiza eksploracyjna"
-author: Tomasz Owczarek
+author: Tomek O.
 date: maj 2018
 output: 
   html_document:
@@ -293,7 +293,7 @@ shootings %>% ggplot(aes(x = age_shooter1)) +
                                            na.rm=TRUE)))
 ```
 
-Histogram wieku pokazuje prawostronną skośność jego rozkładu. Mediana wieku sprawców wynosi 16 lat (co jest zgodne z [artykułem z The Washington Post](https://www.washingtonpost.com/graphics/2018/local/school-shootings-database/?utm_term=.e4c8eb7e8ad0)).
+Histogram wieku pokazuje prawostronną skośność jego rozkładu. Mediana wieku sprawców wynosi 16 lat (co jest zgodne z [artykułem z The Washington Post](https://www.washingtonpost.com/graphics/2018/local/school-shootings-database/?utm_term=.e4c8eb7e8ad0)). Najczęściej występującym wiekiem jest 15 lat.
 
 
 ### Płeć
@@ -308,7 +308,7 @@ shootings.gender$gender_shooter1 <- factor(shootings.gender$gender_shooter1,
 kable(shootings.gender, col.names=c('płeć', 'liczba ataków'))
 ```
 
-Jak pokazuje powyższe podsumowanie, zdecydowana liczba ataków była przeprowadzona przez mężczyzn.
+Jak pokazuje powyższe podsumowanie, zdecydowana większość ataków była przeprowadzona przez mężczyzn.
 
 ### Rodzaj ataku
 
@@ -317,7 +317,7 @@ kable(sort(table(shootings$shooting_type), decreasing = TRUE),
       col.names=c('rodzaj ataku', 'liczebność'))
 ```
 
-Zdecydowanie przważają ataki celowe (*targeted*, czyli z checią zabicia konkretnych osób), oprócz tego jeszcze często zdarzały się przypadki określone jako *indiscriminate* (strzelanie bez konkretnych celów) i strzały przypadkowe (*accidental*). Te trzy typy strzelanin zostały wzięte do dalszej analizy.
+Zdecydowanie przważają ataki celowe (*targeted*, czyli z checią zabicia konkretnych osób), oprócz tego jeszcze często zdarzały się przypadki określone jako *indiscriminate* (strzelanie bez konkretnych celów) i strzały przypadkowe (*accidental*). Te trzy typy strzelanin zostały wzięte pod uwagę w dalszej analizie.
 
 #### Liczba zabitych
 
@@ -359,7 +359,7 @@ shootings %>%
   labs(x = '', y = '') 
 ```
 
-Potwierdza się wcześniejszy wniosek o tym, że najbardziej fatalne w skutkach są ataki typu *indiscriminate*. Za pomocą testu *Kruskala-Wallisa* sprawdzono statyczną istotność różnicy w rozkładach ofiar poszczególnych typów strzelanin - $H_0$ - rozkłady (a dokładniej mediany rozkładów) są takie same, $H_1$ - rozkłady są różne.
+Potwierdza się wcześniejszy wniosek o tym, że najbardziej tragiczne w skutkach są ataki typu *indiscriminate*. Za pomocą testu *Kruskala-Wallisa* sprawdzono statyczną istotność różnicy w rozkładach ofiar poszczególnych typów strzelanin: $H_0$ - rozkłady (a dokładniej mediany rozkładów) są takie same, $H_1$ - rozkłady są różne.
 
 ```{r}
 shootings.filter.type <- shootings %>% 
@@ -418,7 +418,33 @@ kable(
 )
 ```
 
-I to dość ciekawe - dwa razy mniej strzelanin, gdy ochroniarz jest obecny, ale liczba zabitych i rannych jest podobna. Może to oznaczać (ale to tylko przypuszczenie), że obecność ochroniarza odstrasza potencjalnych sprawców, ale jeśli pomimo jego obecności zdecydują się na atak, to są do niego lepiej przygotowani.
+I to dość ciekawe - dwa razy mniej strzelanin, gdy ochroniarz jest obecny, ale liczba zabitych i rannych jest podobna. Może to oznaczać (ale to tylko przypuszczenie), że obecność ochroniarza odstrasza potencjalnych sprawców, ale jeśli pomimo jego obecności zdecydują się na atak, to są do niego lepiej przygotowani. 
+
+Poniżej rysunek pokazujący liczbę ofiar (*casualties*) w poszczególnych strzelaninach (dla większej czytelności pominięto jeden incydent z Hawajów) z uwzględnieniem obecności ochroniarza (niebieski punkt - obecny, czerwony - nieobecny, wielkość punktu określa liczbę ofiar).
+
+```{r warning=FALSE, fig.width=9, fig.height=6}
+library(maps)
+library(ggmap)
+
+# wykluczam Hawaje
+sh <- shootings %>% filter(long > -140)
+# wczytuje dane mapy
+us <- map_data("state")
+
+ggplot() +
+  geom_map(data=us, map=us, aes(x=long, y=lat, map_id=region), 
+           fill='lightgrey', color='black') +
+  geom_point(data=sh, aes(x=long, y=lat, size=casualties,
+                          fill=as.factor(resource_officer)),
+             alpha=0.8, color='black', shape=21) +
+  theme_void() +
+  theme(legend.position = 'none') + 
+  ggtitle('Number of casulties with (blue) and without (red) resource officer') +
+  facet_wrap(~year)
+
+```
+
+Z wykresu wynika, że większość najtragiczniejszych strzelanin miała miejsce przy obecności ochroniarza.
 
 # Wnioski
 
