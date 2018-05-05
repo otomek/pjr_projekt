@@ -15,6 +15,8 @@ output:
 
 
 
+*Poniższa analiza stanowi wzór projektu z przedmiotu pjr dla studentów kierunku ab*
+
 # Wprowadzenie
 
 Celem projektu jest eksploracja danych o strzelaninach w szołach w USA w latach 1999-2018. Dane na ten temat zostały zebrane przez dziennikarzy *The Washington Post* i udostępnione w [tym artykule](https://www.washingtonpost.com/graphics/2018/local/school-shootings-database/?utm_term=.e4c8eb7e8ad0). Dane skladają się z 217 rekordów i 50 zmiennych. Każdy rekord dotyczy pojedynczej strzelaniny.
